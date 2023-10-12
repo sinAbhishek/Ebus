@@ -1,8 +1,21 @@
-import React from "react";
+import "react-dates/initialize";
+import "react-dates/lib/css/_datepicker.css";
+import React, { useState } from "react";
+
 import Navbar from "../Navbar/Navbar";
 import { IoLocationOutline } from "react-icons/io5";
+import {
+  DateRangePicker,
+  SingleDatePicker,
+  DayPickerRangeController,
+} from "react-dates";
 import "./home.css";
+
 const Home = () => {
+  const [state, setState] = useState({
+    date: null,
+    focusedInput: null,
+  });
   return (
     <>
       <Navbar />
@@ -51,17 +64,29 @@ const Home = () => {
                 <div className=" flex items-center">
                   <h1 className=" text-2xl ml-2 text-slate-800">Date</h1>
                 </div>
-                <input
-                  type="text"
-                  placeholder="To City"
-                  style={{ border: "none", borderBottom: "1px solid gray" }}
-                  className=" text-slate-500 outline-none  p-2 ml-8 mt-4"
-                />
+                <div className=" mt-4 ">
+                  <SingleDatePicker
+                    date={state.date}
+                    id="your_unique_id"
+                    onDateChange={(date) => {
+                      setState((prev) => ({ ...prev, date }));
+                    }}
+                    focused={state.focusedInput}
+                    onFocusChange={(focusedInput) =>
+                      setState((prev) => ({ ...prev, focusedInput }))
+                    }
+                    numberOfMonths={1}
+                  />
+                </div>
               </div>
-              <div className="  border border-l-slate-300 h-2/3 ml-8 "></div>
+
+              <button className=" bg-red-400 text-2xl px-4 py-2 text-white">
+                Search
+              </button>
             </div>
           </div>
         </div>
+        <button onClick={() => console.log(state)}>Test</button>
       </div>
     </>
   );
