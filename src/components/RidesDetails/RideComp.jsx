@@ -1,5 +1,8 @@
 import React from 'react'
-
+import { boardingpoint } from '../../data/boardingPoint'
+import { dropPoint } from '../../data/dropPoint'
+import {BsCheck2} from "react-icons/bs"
+import Seats from '../Seat/Seats'
 const RideComp = ({data}) => {
   return (
     <div className=' w-full  bg-white my-4 rounded-xl'>
@@ -34,6 +37,64 @@ const RideComp = ({data}) => {
           <div className=" w-1/2 flex justify-end">
             <button className=' bg-violet-600 w-max px-12 text-lg py-2 rounded-xl text-white '>Select Seat</button>
           </div>
+        </div>
+        <div className=" h-max  bg-slate-200 w-full flex justify-around rounded-xl">
+                <div className="w-2/6 ">
+                    <div className=" w-full bg-white h-96 my-4 rounded-xl">
+                        <div className=" flex justify-between items-center ml-3 ">
+                        <h1 className=' font-semibold text-slate-700 py-4'>Boarding Point</h1>
+                        <p>-</p>
+                        </div>
+                        
+                        <hr />
+                        <div className=" mx-1 bg-slate-300 px-4 py-2 ">
+                            <h1 className=' text-sm text-violet-600'>Select Nearest Boarding Point according to your current location</h1>
+                        </div>
+                        <div className="">
+                            {boardingpoint.map((c)=> <div className=" flex items-center my-2 ml-3">
+                                <div style={{backgroundColor:c.type?"#973EE0":"white"}} className=" border rounded-md border-slate-400 w-8 h-8 flex justify-center items-center">
+                                {c.type&&<BsCheck2 color='white'/>}
+                                </div>
+                                <div className=" flex flex-col ml-3 ">
+                                    <h1 className=' font-medium text-slate-700'>{c.City}</h1>
+                                    <h1 className=' text-sm '>{c.time}</h1>
+                                </div>
+                            </div>
+                            )}
+                        </div>
+                    </div>
+                    <div className=" w-full bg-white h-96 my-4 rounded-xl">
+                    <div className=" flex justify-between items-center ml-3 ">
+                        <h1 className=' font-semibold text-slate-700 py-4'>Drop Point</h1>
+                        <p>-</p>
+                        </div>
+                        
+                        <hr />
+                        <div className=" mx-1 bg-slate-300 px-4 py-2 ">
+                            <h1 className=' text-sm text-violet-600'>Select Nearest Drop Point according to your destinationS</h1>
+                        </div>
+                        <div className="">
+                            {dropPoint.map((c)=> <div className=" flex items-center my-2 ml-3">
+                                <div style={{backgroundColor:c.type?"#973EE0":"white"}} className=" border rounded-md border-slate-400 w-8 h-8 flex justify-center items-center">
+                                {c.type&&<BsCheck2 color='white'/>}
+                                </div>
+                                <div className=" flex flex-col ml-3 ">
+                                    <h1 className=' font-medium text-slate-700'>{c.City}</h1>
+                                    <h1 className=' text-sm '>{c.time}</h1>
+                                </div>
+                            </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+                <div className="w-3/5 bg-white mt-8 h-max">
+                    <div className=" w-full">
+                    <Seats/>
+                    </div>
+                </div>
+            </div>
+            <div className="w-3/5">
+            <div className=" "></div>
         </div>
     </div>
   )

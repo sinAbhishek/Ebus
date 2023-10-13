@@ -64,7 +64,7 @@ const Rides = () => {
               className="  outline-none  "
             />
           </div>
-          <div className=" border border-slate-400 w-1/4 mx-2 rounded-xl px-4 pt-1 flex flex-col justify-center">
+          <div className=" border border-slate-400 w-1/4 mx-2 rounded-xl px-4 pt-1 flex flex-col justify-center ">
             <p className=" text-sm text-slate-500 ">Journey Date</p>
             <SingleDatePicker
               noBorder

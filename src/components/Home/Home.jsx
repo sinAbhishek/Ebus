@@ -27,7 +27,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <div className=" w-screen h-screen flex justify-center mt-8">
+      <div className=" w-screen h-screen flex justify-center mt-8 -z-10">
         <div className=" w-4/5 h-full ">
           <div className="w-full h-2/3 relative flex justify-center">
             <img
