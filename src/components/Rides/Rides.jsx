@@ -7,6 +7,7 @@ import "./rides.css";
 import { BsBookmarkCheckFill } from "react-icons/bs";
 import { CityContext } from "../../Context/Context";
 import { HiOutlineDownload } from "react-icons/hi";
+import {RideData} from "../../data/Ridedata.js"
 import {
   DateRangePicker,
   SingleDatePicker,
@@ -14,6 +15,7 @@ import {
 } from "react-dates";
 import Dateslots from "../Dates/Dateslots";
 import {FaSortAmountUpAlt} from "react-icons/fa"
+import RideComp from "../RidesDetails/RideComp";
 const Rides = () => {
   const date = new Date();
   const dates = [];
@@ -147,6 +149,9 @@ const Rides = () => {
                 <h1 className=" font-semibold mr-2">Price</h1>
                 <FaSortAmountUpAlt color="#973EE0"/>
                 </div>
+              </div>
+              <div className="w-full">
+               {RideData.map((c)=><RideComp data={c}/>)}
               </div>
             </div>
           </div>
