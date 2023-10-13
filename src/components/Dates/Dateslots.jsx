@@ -10,12 +10,12 @@ const Dateslots = ({ data, active }) => {
 
   return (
     <>
-      <div className=" flex justify-center items-center flex-col w-24 bg-red-500 ml-2 mr-2 rounded-lg ">
-        <h1 className=" text-xs font-semibold text-white">{weekdays[day]}</h1>
+      <div style={{backgroundColor:active===data?"#EF4968":"#EFEFEF"}} className=" flex justify-center items-center flex-col w-24  ml-2 mr-2 rounded-lg h-full ">
+        <h1 style={{color:active===data?"white":"gray"}} className=" text-xs font-semibold ">{weekdays[day]}</h1>
         <div className=" flex">
           <h1
-            style={{ color: active === data ? "white" : "#34c6eb" }}
-            className=" flex justify-center items-center text-xs font-bold "
+            style={{color:active===data?"white":"gray"}}
+            className=" flex justify-center items-center text-xs  "
           >
             {date}
           </h1>

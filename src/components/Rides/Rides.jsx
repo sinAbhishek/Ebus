@@ -13,16 +13,18 @@ import {
   DayPickerRangeController,
 } from "react-dates";
 import Dateslots from "../Dates/Dateslots";
+import {FaSortAmountUpAlt} from "react-icons/fa"
 const Rides = () => {
   const date = new Date();
   const dates = [];
-  const startdate = new Date(date.getFullYear(), date.getMonth(), 1).getTime();
+  const startdate = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime()
   const enddate = new Date(
     date.getFullYear(),
     date.getMonth() + 1,
     0
   ).getDate();
   const { City, dispatch } = useContext(CityContext);
+  const [active,setactive]=useState(startdate)
   const [state, setState] = useState({
     date: City.JourneyDate,
     focused: null,
@@ -33,6 +35,9 @@ const Rides = () => {
     } else {
       dates.push(startdate);
     }
+  }
+  const handleactive=(c)=>{
+    setactive(c)
   }
   return (
     <>
@@ -120,8 +125,28 @@ const Rides = () => {
             <div className="w-3/4  ">
               <div className=" w-full flex bg-white rounded-md mt-3 border h-20 justify-around py-3">
                 {dates.map((c) => (
-                  <Dateslots data={c} />
+                  <div onClick={()=>handleactive(c)} className="h-full">
+                    <Dateslots active={active} data={c} />
+                  </div>
+                 
                 ))}
+              </div>
+              <div className=" flex h-11 bg-white mt-4 px-4  items-center rounded-lg py-2">
+                <div className="flex justify-center items-center">
+                  <h1 className=" font-semibold">Sort By:</h1>
+                </div>
+                <div className=" flex justify-center items-center ml-20">
+                  <h1 className=" font-semibold mr-2">Departure Time</h1>
+                  <FaSortAmountUpAlt color="#973EE0"/>
+                </div>
+                <div className=" flex justify-center items-center ml-20">
+                <h1 className=" font-semibold mr-2">Arrival Time</h1>
+                <FaSortAmountUpAlt color="#973EE0"/>
+                </div>
+                <div className=" flex justify-center items-center ml-20">
+                <h1 className=" font-semibold mr-2">Price</h1>
+                <FaSortAmountUpAlt color="#973EE0"/>
+                </div>
               </div>
             </div>
           </div>
