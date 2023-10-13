@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { boardingpoint } from '../../data/boardingPoint'
 import { dropPoint } from '../../data/dropPoint'
 import {BsCheck2} from "react-icons/bs"
 import Seats from '../Seat/Seats'
 const RideComp = ({data}) => {
+    const [open,setopen]=useState(false)
   return (
     <div className=' w-full  bg-white my-4 rounded-xl'>
         <div className=" w-full flex justify-between px-4 py-4 ">
@@ -34,11 +35,12 @@ const RideComp = ({data}) => {
                 <h1 className=' text-violet-600 text-lg'>Timeline</h1>
                 <h1 className=' text-violet-600 text-lg'>Cancellation policy</h1>
             </div>
-          <div className=" w-1/2 flex justify-end">
-            <button className=' bg-violet-600 w-max px-12 text-lg py-2 rounded-xl text-white '>Select Seat</button>
+          <div onClick={()=>setopen(!open)} className=" w-1/2 flex justify-end">
+            {open?<button className=' bg-violet-600 w-max px-12 text-lg py-2 rounded-xl text-white '>Select Seat</button>:<button className=' bg-violet-600 w-max px-12 text-lg py-2 rounded-xl text-white '>Hide Seat</button>}
+
           </div>
         </div>
-        <div className=" h-max  bg-slate-200 w-full flex justify-around rounded-xl">
+        <div style={{display:open?"none":"flex"}} className=" h-max  bg-slate-200 w-full justify-around rounded-xl">
                 <div className="w-2/6 ">
                     <div className=" w-full bg-white h-96 my-4 rounded-xl">
                         <div className=" flex justify-between items-center ml-3 ">
@@ -93,9 +95,7 @@ const RideComp = ({data}) => {
                     </div>
                 </div>
             </div>
-            <div className="w-3/5">
-            <div className=" "></div>
-        </div>
+     
     </div>
   )
 }

@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./navbar.css"
 import { authentication } from "../../Firebase/Firebase-config";
 import {  RecaptchaVerifier,signInWithPhoneNumber } from "firebase/auth";
 import {AiOutlineClose} from "react-icons/ai"
+import {GiHamburgerMenu} from "react-icons/gi"
 const Navbar = () => {
 const [active,setactive]=useState(true)
+const countrycode="+91"
 const [phoneNumber,setphoneNumber]=useState("")
 const [Otp,setOtp]=useState("")
 const [hide,sethide]=useState(true)
+const user = authentication.currentUser;
+
+useEffect(()=>{
+  console.log(user)
+},[user])
 const requestotp=(e)=>{
   e.preventDefault();
+  const number=countrycode+phoneNumber
   console.log("hit")
   
   setactive(false)
@@ -21,7 +29,7 @@ const requestotp=(e)=>{
     }
   });
   let appVerifier= window.recaptchaVerifier
-  signInWithPhoneNumber(authentication, phoneNumber, appVerifier)
+  signInWithPhoneNumber(authentication, number, appVerifier)
     .then((confirmationResult) => {
       // SMS sent. Prompt user to type the code from the message, then sign the
       // user in with confirmationResult.confirm(code).
@@ -42,6 +50,7 @@ const verifyotp=(e)=>{
   confirmationResult.confirm(Otp).then((result) => {
     // User signed in successfully.
     const user = result.user;
+    sethide(false)
     // ...
   }).catch((error) => {
     // User couldn't sign in (bad verification code?)
@@ -60,9 +69,12 @@ const verifyotp=(e)=>{
           </div>
           </div>
           <div onClick={()=>sethide(false)} className="w-1/2 flex justify-end items-end flex-col hover:cursor-pointer">
-          <h1 className=" font-bold text-violet-600">Signup</h1>
+            {user===null?<div className="">
+            <h1 className=" font-bold text-violet-600">Signup</h1>
           <p className=" text-xs">And <span className=" font-semibold">Get ₹200 OFF</span>  on first booking
           </p>
+            </div>:<div className=""><GiHamburgerMenu/></div>}
+  
           </div>
     </div>
 
@@ -83,7 +95,7 @@ const verifyotp=(e)=>{
   <div className=" w-max flex items-center border border-slate-500 py-3 px-12 rounded-lg relative">
     {active&&<img className=" w-6 h-5 absolute left-4" src="https://cdn.britannica.com/97/1597-050-008F30FA/Flag-India.jpg" alt="" />}
     {active&&<h1 className=" text-lg mr-2">+91</h1>}
-  {active?<input value={phoneNumber}  onChange={(e)=>setphoneNumber(e.target.value)} className="  outline-none" type="text" placeholder="Mobile Number" />:<input value={Otp} onChange={(e)=>setOtp(e.target.value)} className="  outline-none" type="text" placeholder="Enter OTP" />}
+  {active?<input value={phoneNumber}  onChange={(e)=>setphoneNumber((prev)=>prev+e.target.value)} className="  outline-none" type="text" placeholder="Mobile Number" />:<input value={Otp} onChange={(e)=>setOtp(e.target.value)} className="  outline-none" type="text" placeholder="Enter OTP" />}
   </div>
 
 {active?<button onClick={(e)=>requestotp(e)} className=" w-max bg-violet-600 text-white px-28 py-4 mt-4 rounded-lg">Request otp</button>:<button onClick={(e)=>verifyotp(e)} className=" w-max bg-violet-600 text-white px-28 py-4 mt-4 rounded-lg">Login</button>}
@@ -92,7 +104,7 @@ const verifyotp=(e)=>{
 <div className="" id="recaptcha-container"></div>
 </div>
   </div>
-
+<button onClick={()=> console.log(countrycode+phoneNumber)}> testff</button>
   </>)
 };
 

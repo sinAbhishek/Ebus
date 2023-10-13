@@ -13,7 +13,7 @@ import {TbSteeringWheel} from "react-icons/tb"
         </div>
         <div className=" w-11/12 flex flex-wrap ml-4">
         {seats.map((c)=> <div onClick={()=>setactive((prev)=>[...prev,c])} className=" mx-2 my-2">
-          <div style={{backgroundColor:active.includes(c)?"#F590B0":"white",borderColor:active.includes(c)?"#EE2967":"black"}} className=" border-2  w-16 h-10 rounded-md flex justify-end items-center">
+          <div style={{backgroundColor:active.includes(c)?"#F590B0":"white",borderColor:active.includes(c)?"#EE2967":"black"}} className=" border-2  w-16 h-10 rounded-md flex justify-end items-center hover:bg-slate-600">
             <div style={{borderColor:active.includes(c)?"#EE2967":"black"}} className="border-2   h-4/5 w-2 rounded-lg mr-1 "></div>
           </div>
         </div> )}

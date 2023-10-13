@@ -1,8 +1,9 @@
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import { useState } from "react";
+import {BsCheck2} from "react-icons/bs"
 import "./rides.css";
 import { BsBookmarkCheckFill } from "react-icons/bs";
 import { CityContext } from "../../Context/Context";
@@ -27,6 +28,9 @@ const Rides = () => {
   ).getDate();
   const { City, dispatch } = useContext(CityContext);
   const [active,setactive]=useState(startdate)
+  const [filterdata,setfilter]=useState(RideData)
+  const [daytime,setdaytime]=useState(false)
+  const [late,setlate]=useState(false)
   const [state, setState] = useState({
     date: City.JourneyDate,
     focused: null,
@@ -40,6 +44,23 @@ const Rides = () => {
   }
   const handleactive=(c)=>{
     setactive(c)
+  }
+  useEffect(()=>{
+    if(daytime){
+      setfilter(RideData.filter((c)=>c.type==="Daytime"))
+    }
+    else if(late){
+      setfilter(RideData.filter((c)=>c.type==="Late"))
+    }
+    else{
+      setfilter(RideData)
+    }
+  },[daytime,late])
+  const handledaytime=()=>{
+setdaytime(!daytime)
+  }
+  const handleLate=()=>{
+  setlate(!late)
   }
   return (
     <>
@@ -123,7 +144,39 @@ const Rides = () => {
             </button>
           </div>
           <div className=" flex w-9/12  justify-between ">
-            <div className=" w-1/5 bg-white"></div>
+            <div className=" w-1/5 ">
+              <div className=" flex  bg-white flex-col p-4 rounded-lg">
+                <div className=" flex justify-between items-center">
+                <h1>Vehicle type</h1>
+              <p>-</p>
+                </div>
+              <div className=" flex items-center mt-4">
+              <div className=" border rounded-md border-slate-400 w-8 h-8 flex justify-center items-center">
+                               
+                               </div>
+                               <h1 className=" text-base font-medium ml-2 text-slate-600">BUS</h1>
+              </div>
+              </div>
+              <div className=" flex  bg-white flex-col p-4 rounded-lg mt-8">
+                <div className=" flex justify-between items-center">
+                <h1>Departure Time</h1>
+              <p>-</p>
+                </div>
+              <div className=" flex items-center mt-4">
+              <div onClick={()=>handledaytime()} style={{backgroundColor:daytime?"#973EE0":"white"}} className=" border rounded-md border-slate-400 w-8 h-8 flex justify-center items-center">
+              <BsCheck2 color='white'/>
+                               </div>
+                               <h1 className=" text-base font-medium ml-2 text-slate-600">Daytime(6AM-9PM)</h1>
+              </div>
+              <div className=" flex items-center mt-4">
+              <div onClick={()=>handleLate()} style={{backgroundColor:late?"#973EE0":"white"}} className=" border rounded-md border-slate-400 w-8 h-8 flex justify-center items-center">
+              <BsCheck2 color='white'/>
+                               </div>
+                               <h1 className=" text-base font-medium ml-2 text-slate-600">Late(9PM-12AM)</h1>
+              </div>
+              </div>
+    
+            </div>
             <div className="w-3/4  ">
               <div className=" w-full flex bg-white rounded-md mt-3 border h-20 justify-around py-3">
                 {dates.map((c) => (
@@ -151,7 +204,7 @@ const Rides = () => {
                 </div>
               </div>
               <div className="w-full">
-               {RideData.map((c)=><RideComp data={c}/>)}
+               {filterdata.map((c)=><RideComp data={c}/>)}
               </div>
             </div>
           </div>
