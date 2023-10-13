@@ -4,7 +4,7 @@ import { dropPoint } from '../../data/dropPoint'
 import {BsCheck2} from "react-icons/bs"
 import Seats from '../Seat/Seats'
 const RideComp = ({data}) => {
-    const [open,setopen]=useState(false)
+    const [open,setopen]=useState(true)
   return (
     <div className=' w-full  bg-white my-4 rounded-xl'>
         <div className=" w-full flex justify-between px-4 py-4 ">

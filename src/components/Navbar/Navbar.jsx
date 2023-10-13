@@ -50,7 +50,7 @@ const verifyotp=(e)=>{
   confirmationResult.confirm(Otp).then((result) => {
     // User signed in successfully.
     const user = result.user;
-    sethide(false)
+    sethide(true)
     // ...
   }).catch((error) => {
     // User couldn't sign in (bad verification code?)
@@ -60,7 +60,7 @@ const verifyotp=(e)=>{
   return(
   <>
 
-  <div className=" nav sticky top-0 w-screen h-24 bg-white  flex justify-center items-center">
+  <div className=" nav sticky top-0 w-screen h-24 bg-white  flex justify-center items-center z-20">
     <div className=" w-4/5 flex justify-center items-center">
     <div className=" w-1/2 flex items-center">
       <div className="flex justify-center items-center">
@@ -95,7 +95,7 @@ const verifyotp=(e)=>{
   <div className=" w-max flex items-center border border-slate-500 py-3 px-12 rounded-lg relative">
     {active&&<img className=" w-6 h-5 absolute left-4" src="https://cdn.britannica.com/97/1597-050-008F30FA/Flag-India.jpg" alt="" />}
     {active&&<h1 className=" text-lg mr-2">+91</h1>}
-  {active?<input value={phoneNumber}  onChange={(e)=>setphoneNumber((prev)=>prev+e.target.value)} className="  outline-none" type="text" placeholder="Mobile Number" />:<input value={Otp} onChange={(e)=>setOtp(e.target.value)} className="  outline-none" type="text" placeholder="Enter OTP" />}
+  {active?<input value={phoneNumber}  onChange={(e)=>setphoneNumber(e.target.value)} className="  outline-none" type="text" placeholder="Mobile Number" />:<input value={Otp} onChange={(e)=>setOtp(e.target.value)} className="  outline-none" type="text" placeholder="Enter OTP" />}
   </div>
 
 {active?<button onClick={(e)=>requestotp(e)} className=" w-max bg-violet-600 text-white px-28 py-4 mt-4 rounded-lg">Request otp</button>:<button onClick={(e)=>verifyotp(e)} className=" w-max bg-violet-600 text-white px-28 py-4 mt-4 rounded-lg">Login</button>}
@@ -104,7 +104,7 @@ const verifyotp=(e)=>{
 <div className="" id="recaptcha-container"></div>
 </div>
   </div>
-<button onClick={()=> console.log(countrycode+phoneNumber)}> testff</button>
+
   </>)
 };
 

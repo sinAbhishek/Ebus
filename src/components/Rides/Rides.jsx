@@ -209,7 +209,7 @@ setdaytime(!daytime)
             </div>
           </div>
         </div>
-        <button onClick={() => console.log(dates)}>test dates</button>
+        
       </div>
     </>
   );

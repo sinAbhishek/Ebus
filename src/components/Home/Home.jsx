@@ -105,7 +105,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <button onClick={() => console.log(City)}>Test</button>
+        
       </div>
     </>
   );
